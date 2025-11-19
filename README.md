@@ -1,1 +1,0 @@
-# jenkins-terraform-ec2
