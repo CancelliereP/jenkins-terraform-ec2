@@ -14,7 +14,7 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                withAWS(credentials: 'AWS_CREDENTIALS_ID', region: env.AWS_DEFAULT_REGION) {
+		withAWS(credentials: env.AWS_CREDENTIALS_ID, region: env.AWS_DEFAULT_REGION) {
                     sh 'terraform init'
                 }
             }
@@ -22,7 +22,7 @@ pipeline {
 
         stage('Terraform Plan') {
             steps {
-                withAWS(credentials: 'AWS_CREDENTIALS_ID', region: env.AWS_DEFAULT_REGION) {
+                withAWS(credentials: env.AWS_CREDENTIALS_ID, region: env.AWS_DEFAULT_REGION) {
                     sh 'terraform plan -out=tfplan'
                 }
             }
@@ -42,7 +42,7 @@ pipeline {
 
         stage('Terraform Apply') {
             steps {
-                withAWS(credentials: 'AWS_CREDENTIALS_ID', region: env.AWS_DEFAULT_REGION) {
+		withAWS(credentials: env.AWS_CREDENTIALS_ID, region: env.AWS_DEFAULT_REGION) {
                     sh 'terraform apply -auto-approve tfplan'
                 }
             }
