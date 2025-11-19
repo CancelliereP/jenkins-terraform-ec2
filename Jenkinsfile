@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        AWS_DEFAULT_REGION = 'eu-west-3'   // cambiala se serve
+        AWS_DEFAULT_REGION = 'eu-west-3'  // cambia con la tua regione se vuoi
     }
 
     stages {
@@ -28,11 +28,15 @@ pipeline {
             }
         }
 
-        stage('Approval') {                     // opzionale ma fortemente consigliato in prod
-            when {                input message: "Vuoi applicare il plan?", ok: "Apply"
-                steps {
-                    echo "Approvato"
-                }
+        // Stage di approvazione manuale (corretto!)
+        stage('Approval') {
+            when {
+                // mostra questo stage solo su branch main (o cambia con il tuo)
+                branch 'main'
+            }
+            steps {
+                input message: 'Vuoi applicare il Terraform plan?', 
+                      ok: 'Apply'
             }
         }
 
