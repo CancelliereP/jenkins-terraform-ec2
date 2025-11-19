@@ -12,10 +12,26 @@ provider "aws" {
   region = var.region
 }
 
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+  owners      = ["137112412989"]  # Amazon official
+
+  filter {
+    name   = "Test"
+    values = ["al2023-ami-2023.*-x86_64"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
 resource "aws_instance" "example" {
-  ami           = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 o 2023 nella tua regione
+  ami           = data.aws_ami.amazon_linux.id
   instance_type = "t2.micro"
+
   tags = {
-    Name = "jenkins-pipeline-test"
+    Name = "Terraform_Ec2_httpd"
   }
 }
