@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        AWS_DEFAULT_REGION = 'eu-west-1'   // cambiala se serve
+        AWS_DEFAULT_REGION = 'eu-west-3'   // cambiala se serve
     }
 
     stages {
