@@ -17,7 +17,7 @@ data "aws_ami" "amazon_linux" {
   owners      = ["137112412989"]  # Amazon official
 
   filter {
-    name   = "Test"
+    name   = "name"
     values = ["al2023-ami-2023.*-x86_64"]
   }
 
@@ -32,6 +32,6 @@ resource "aws_instance" "example" {
   instance_type = "t2.micro"
 
   tags = {
-    Name = "Terraform_Ec2_httpd"
+    Name = "jenkins-pipeline-test"
   }
 }
